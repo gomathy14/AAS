@@ -1,0 +1,14 @@
+
+DROP TABLE IF EXISTS income;
+
+
+
+
+CREATE TABLE income (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name TEXT NOT NULL,
+    Block TEXT NOT NULL,
+    UnitNo INTEGER NOT NULL,
+    MaintenanceFee INTEGER NOT NULL,
+    Due INTEGER NOT NULL
+);

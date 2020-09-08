@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Global industries</title>
+
+</head>
+<body>
+ <form method="post">
+    <label for="Name">Name</label>
+    <input name="Name" id="Name" value="{{ request.form['Name'] }}" required>
+    <label for="Block">Block</label>
+    <input name="Block" id="Block" value="{{ request.form['Block'] }}" required>
+    <label for="UnitNo">UnitNo</label>
+    <input name="UnitNo" id="UnitNo" value="{{ request.form['UnitNo'] }}" required>
+    <label for="MaintenanceFee">MaintenanceFee</label>
+    <input name="MaintenanceFee" id="MaintenanceFee" value="{{ request.form['MaintenanceFee'] }}" required>
+    <label for="Due">Due</label>
+    <input name="Due" id="Due" value="{{ request.form['Due'] }}" required>
+    <input type="submit" value="Save">
+  </form>
+
+
+	</body>
