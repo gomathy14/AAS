@@ -29,8 +29,8 @@ def create_app(test_config=None):
     db.init_app(app)
 
     
-    from . import blog
-    app.register_blueprint(blog.bp)
+    from . import views
+    app.register_blueprint(views.bp)
     app.add_url_rule('/', endpoint='index')
 
     return app

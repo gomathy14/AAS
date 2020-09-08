@@ -6,7 +6,7 @@ from werkzeug.exceptions import abort
 
 from .db import get_db
 
-bp = Blueprint('blog', __name__)
+bp = Blueprint('views', __name__)
 
 
 @bp.route('/')
@@ -18,7 +18,7 @@ def index():
         
         
     ).fetchall()
-    return render_template('blog/index.html', posts=posts)
+    return render_template('index.html', posts=posts)
 
 
 
@@ -47,6 +47,6 @@ def create():
                 
             )
             db.commit()
-            return redirect(url_for('blog.index'))
+            return redirect(url_for('views.index'))
 
-    return render_template('blog/create.html')    
+    return render_template('create.html')    
