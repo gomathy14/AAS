@@ -10,12 +10,14 @@
   <meta name="author" content="">
 
   <title>Aas</title>
-
 </head>
 <body>
+
+  <h1>Due Amount is {{ due }} </h1>
+
  <form method="post">
-    <label for="Amount">Enter the Amount</label>
-    <input name="Amount" id="Amount" value="{{ request.form['Amount'] }}" required>    
+    <label for="amount">Enter the amount</label>
+    <input name="amount" id="amount" value="{{ request.form['amount'] }}" required>    
     <input type="submit" value="Save">
   </form>
 
