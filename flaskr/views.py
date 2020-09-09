@@ -75,5 +75,5 @@ def payment(income_id):
             ' FROM income p WHERE p.id == income_id'
             ).fetchall()
 
-    return render_template('payment.html', due=due)   
+    return render_template('addpayment.html', due=due)   
 
