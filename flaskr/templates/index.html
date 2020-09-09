@@ -31,6 +31,8 @@
             <th>UnitNo</th>
             <th>MaintenanceFee</th>
             <th>Due</th>
+            <th>History</th>
+            <th>Payment</th>
           </tr>
         </thead>
         <tbody align="center">
@@ -44,9 +46,10 @@
               <td>{{ e.MaintenanceFee }}</td>
               <td>{{ e.Due }}</td>
 
-              <div class="button-group" align="right" >
-          <a href="{{ url_for('views.payment['e']') }}" class="btn btn-primary" role="button" >
-             Enter Payment </a>
+              <td>
+              <a href="{{ url_for('views.history', income_id=e.id ) }}" class="btn btn-primary" role="button" >
+              View History </a>
+            </td>
               <td>
               <a href="{{ url_for('views.payment', income_id=e.id ) }}" class="btn btn-primary" role="button" >
               Enter Payment </a>

@@ -13,11 +13,16 @@
 
 </head>
 <body>
+  <div class="container">
  <form method="post">
+  <div class="form-group">
     <label for="Name">Name</label>
     <input name="Name" id="Name" class="form-control" value="{{ request.form['Name'] }}" required>
+  </div>
+  <div class="form-group">
     <label for="Block">Block</label>
     <input name="Block" id="Block" value="{{ request.form['Block'] }}" required>
+  </div>
     <label for="UnitNo">UnitNo</label>
     <input name="UnitNo" id="UnitNo" value="{{ request.form['UnitNo'] }}" required>
     <label for="MaintenanceFee">MaintenanceFee</label>
@@ -26,6 +31,7 @@
     <input name="Due" id="Due" value="{{ request.form['Due'] }}" required>
     <input type="submit" value="Save">
   </form>
+</div>
 
 
 	</body>

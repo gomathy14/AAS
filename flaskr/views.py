@@ -82,5 +82,16 @@ def payment(income_id):
 
             return redirect(url_for('views.index'))
     
-    return render_template('addpayment.html', due=due)   
+    return render_template('addpayment.html', due=due)  
+
+@bp.route('/history/<int:income_id>')
+def history(income_id):
+    db=get_db()
+    posts=db.execute(
+            'SELECT p.id,amount,Pdate'
+            ' FROM payment p'
+            ' WHERE p.income_id={}'.format(income_id)
+        ).fetchall()
+    return render_template('history.html', posts=posts)
+
 
