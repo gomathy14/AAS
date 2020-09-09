@@ -50,3 +50,6 @@ def create():
             return redirect(url_for('views.index'))
 
     return render_template('create.html')    
+
+
+
