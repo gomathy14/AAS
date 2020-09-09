@@ -48,12 +48,16 @@ def create():
     return render_template('create.html')    
 
 
-
-
 @bp.route('/payment/<int:income_id>', methods=('GET', 'POST'))
 def payment(income_id):
+
+    db = get_db()
+    query = "SELECT Due from income p where p.id = {}".format(income_id) 
+    row = db.execute(query).fetchone()
+    due = row[0]
+
     if request.method == 'POST':
-        amount = request.form['amount']
+        amount = int(request.form['amount'])
         error = None
 
         if error is not None:
@@ -66,14 +70,17 @@ def payment(income_id):
                 (income_id, amount)
             )
             db.commit()
+
+            due = due - amount
+
+            db.execute(
+                'UPDATE income SET due = ? '
+                ' WHERE id = ?',
+                ( due, income_id)
+            )
+            db.commit()
+
             return redirect(url_for('views.index'))
-    else: 
-
-        db = get_db()
-        due = db.execute(
-            'SELECT Due'
-            ' FROM income p WHERE p.id == income_id'
-            ).fetchall()
-
+    
     return render_template('addpayment.html', due=due)   
 
