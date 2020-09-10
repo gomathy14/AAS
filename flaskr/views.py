@@ -19,6 +19,28 @@ def index():
     ).fetchall()
     return render_template('index.html', posts=posts)
 
+@bp.route('/paid')    
+def paid():
+    db = get_db()
+    posts = db.execute(
+        'SELECT p.id, Name,Block,UnitNo,MaintenanceFee,Due'
+        ' FROM income p '
+        ' WHERE Due=0'
+         
+    ).fetchall()
+    return render_template('paid.html', posts=posts)
+
+@bp.route('/unpaid')     
+def unpaid():
+    db = get_db()
+    posts = db.execute(
+        'SELECT p.id, Name,Block,UnitNo,MaintenanceFee,Due'
+        ' FROM income p'
+        ' WHERE Due>0'
+         
+    ).fetchall()
+    return render_template('unpaid.html', posts=posts)       
+
 @bp.route('/create', methods=('GET', 'POST'))
 def create():
     if request.method == 'POST':
@@ -55,6 +77,7 @@ def payment(income_id):
     query = "SELECT Due from income p where p.id = {}".format(income_id) 
     row = db.execute(query).fetchone()
     due = row[0]
+    
 
     if request.method == 'POST':
         amount = int(request.form['amount'])
@@ -79,6 +102,8 @@ def payment(income_id):
                 ( due, income_id)
             )
             db.commit()
+            
+                
 
             return redirect(url_for('views.index'))
     
@@ -95,3 +120,113 @@ def history(income_id):
     return render_template('history.html', posts=posts)
 
 
+@bp.route('/vendor')
+def vendor():
+    db = get_db()
+    posts = db.execute(
+        'SELECT p.id, Vname,cause,phone,fee'
+        ' FROM expenses p'
+         
+    ).fetchall()
+    return render_template('vendor.html', posts=posts)
+
+
+@bp.route('/vcreate', methods=('GET', 'POST'))
+def vcreate():
+    if request.method == 'POST':
+        Vname = request.form['Vname']
+        cause = request.form['cause']
+        phone = request.form['phone']
+        fee = request.form['fee']
+        error = None
+
+        if not Vname:
+            error = 'Name is required.'
+
+        if error is not None:
+            flash(error)
+        else:
+            db = get_db()
+            db.execute(
+                'INSERT INTO expenses (Vname,cause,phone,fee)'
+                ' VALUES (?, ?, ?, ?)',
+                (Vname,cause,phone,fee)
+                
+            )
+            db.commit()
+            return redirect(url_for('views.vendor'))
+
+    return render_template('vcreate.html')    
+
+
+@bp.route('/salary/<int:expense_id>', methods=('GET', 'POST'))
+def salary(expense_id):
+
+    db = get_db()
+    query = "SELECT fee from expenses p where p.id = {}".format(expense_id) 
+    row = db.execute(query).fetchone()
+    due = row[0]
+    
+
+    if request.method == 'POST':
+        amount = int(request.form['amount'])
+        error = None
+
+        if error is not None:
+            flash(error)
+        else:
+            db = get_db()
+            db.execute(
+                'INSERT INTO salary (expense_id,amount)'
+                ' VALUES (?, ?)',
+                (expense_id, amount)
+            )
+            db.commit()
+
+            due = due + amount
+
+            db.execute(
+                'UPDATE expenses SET fee = ? '
+                ' WHERE id = ?',
+                ( due, expense_id)
+            )
+            db.commit()
+            
+                
+
+            return redirect(url_for('views.vendor'))
+    
+    return render_template('addpayment.html', due=due)  
+
+@bp.route('/vhistory/<int:expense_id>')
+def vhistory(expense_id):
+    db=get_db()
+    posts=db.execute(
+            'SELECT p.id,amount,Pdate'
+            ' FROM salary p'
+            ' WHERE p.expense_id={}'.format(expense_id)
+        ).fetchall()
+    return render_template('history.html', posts=posts)
+
+
+@bp.route('/paid')    
+def vpaid():
+    db = get_db()
+    posts = db.execute(
+        'SELECT p.id, Vname,cause,phone,fee'
+        ' FROM expenses p'
+        ' WHERE Due=0'
+         
+    ).fetchall()
+    return render_template('paid.html', posts=posts)
+
+@bp.route('/unpaid')     
+def vunpaid():
+    db = get_db()
+    posts = db.execute(
+        'SELECT p.id, Vname,cause,phone,fee'
+        ' FROM expenses p'
+        ' WHERE Due>0'
+         
+    ).fetchall()
+    return render_template('unpaid.html', posts=posts)

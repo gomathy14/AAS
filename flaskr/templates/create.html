@@ -1,37 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+{% block content %}
+<h1 class="h3 mb-2 text-gray-800">Residents Details</h1>
+<p class="mb-4">Create User</p>
 
-  <title>Aas</title>
+  
 
-</head>
+
 <body>
   <div class="container">
  <form method="post">
-  <div class="form-group">
-    <label for="Name">Name</label>
-    <input name="Name" id="Name" class="form-control" value="{{ request.form['Name'] }}" required>
-  </div>
-  <div class="form-group">
-    <label for="Block">Block</label>
-    <input name="Block" id="Block" value="{{ request.form['Block'] }}" required>
-  </div>
-    <label for="UnitNo">UnitNo</label>
-    <input name="UnitNo" id="UnitNo" value="{{ request.form['UnitNo'] }}" required>
-    <label for="MaintenanceFee">MaintenanceFee</label>
-    <input name="MaintenanceFee" id="MaintenanceFee" value="{{ request.form['MaintenanceFee'] }}" required>
-    <label for="Due">Due</label>
-    <input name="Due" id="Due" value="{{ request.form['Due'] }}" required>
-    <input type="submit" value="Save">
+  <label for="Name">&emsp;<b>Name : </b> &emsp;&ensp; &emsp; &emsp;&nbsp;</label>
+    <input name="Name" id="Name" style="width: 150px;" placeholder="Enter the name" value="{{ request.form['Name'] }}" required>
+    <br>
+    <label for="Block">&emsp;<b>Block :</b> &ensp;&emsp; &emsp; &emsp;&nbsp;</label>
+    <input name="Block" id="Block" style="width: 150px;" placeholder="Enter the BlockNo" value="{{ request.form['Block'] }}"  required>
+    <br>
+    <label for="UnitNo">&emsp;<b>UnitNo :</b>&nbsp;&emsp; &emsp; &ensp;&ensp;</label>
+    <input name="UnitNo" id="UnitNo" style="width: 150px;" placeholder="Enter the UnitNo" value="{{ request.form['UnitNo'] }}" required>
+    <br>
+    <label for="MaintenanceFee">&emsp;<b>MaintenanceFee:</b></label>
+    <input name="MaintenanceFee" id="MaintenanceFee"style="width: 150px;" placeholder="Enter the MaintenanceFee" value="{{ request.form['MaintenanceFee'] }}" required>
+    <br>
+    <label for="Due">&emsp;<b>Due :</b> &emsp;&emsp;&emsp;&emsp;&ensp;&nbsp;</label>
+    <input name="Due" id="Due" style="width: 150px;" placeholder="Enter the DueAmount" value="{{ request.form['Due'] }}" required>
+    <br>
+    
+    
+    
+    <button class ="btn btn-primary">Save</button>
+    <input action="action" class="btn btn-primary" onclick="window.history.go(-1); 
+      return false;" type="submit" value="Cancel"/>
+
   </form>
-</div>
+
 
 
 	</body>
+{% endblock %}  
