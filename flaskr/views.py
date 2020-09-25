@@ -186,7 +186,7 @@ def salary(expense_id):
             due = due + amount
 
             db.execute(
-                'UPDATE expenses SET fee = ? '
+                'UPDATE expenses SET fee = ? ,ispaid=0'
                 ' WHERE id = ?',
                 ( due, expense_id)
             )
@@ -209,24 +209,34 @@ def vhistory(expense_id):
     return render_template('history.html', posts=posts)
 
 
-@bp.route('/paid')    
+@bp.route('/vpaid')    
 def vpaid():
     db = get_db()
     posts = db.execute(
         'SELECT p.id, Vname,cause,phone,fee'
         ' FROM expenses p'
-        ' WHERE Due=0'
+        ' WHERE ispaid=1'
          
     ).fetchall()
-    return render_template('paid.html', posts=posts)
+    return render_template('vpaid.html', posts=posts)
 
-@bp.route('/unpaid')     
+@bp.route('/vunpaid')     
 def vunpaid():
     db = get_db()
     posts = db.execute(
         'SELECT p.id, Vname,cause,phone,fee'
         ' FROM expenses p'
-        ' WHERE Due>0'
+        ' WHERE ispaid=0 '
          
     ).fetchall()
-    return render_template('unpaid.html', posts=posts)
+    return render_template('vunpaid.html', posts=posts)
+
+@bp.route('/paynow/<int:expense_id>')
+def paynow(expense_id):
+    db=get_db()
+    posts=db.execute(
+        'UPDATE expenses set ispaid=1'
+        ' WHERE id={}'.format(expense_id)
+        )
+    db.commit()
+    return redirect(url_for('views.vendor'))

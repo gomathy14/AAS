@@ -3,12 +3,11 @@
 
 {% block content %}
 <body>
-
-<h1 class="h3 mb-2 text-gray-800">Expenses Details</h1>
-<p class="mb-4">View all the expenses made till now  </p>
+<h1 class="h3 mb-2 text-gray-800">Unpaid Details </h1>
+<p class="mb-4">View the list of all people who have not yet paid and their due amount  </p>
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Expense Table</h6>
+    <h6 class="m-0 font-weight-bold text-primary">Fee Table</h6>
   </div>
 
   <div class="card-body">
@@ -18,11 +17,11 @@
           <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Vendor</th>
-            <th>Phoneno</th>
-            <th>Monthly fee</th>
-            <th>History</th>
-            <th>Bonus</th>
+            <th>Department</th>
+            <th>PhoneNo</th>
+            <th>Salary</th>
+            <th>Pay</th>
+            
           </tr>
         </thead>
         <tbody align="center">
@@ -34,17 +33,12 @@
               <td>{{ e.cause }}</td>
               <td>{{ e.phone }}</td>
               <td>{{ e.fee }}</td>
-              
 
               <td>
-              <a href="{{ url_for('views.vhistory', expense_id=e.id ) }}" class="btn btn-primary" role="button" >
-              View History </a>
+              <a href="{{ url_for('views.paynow', expense_id=e.id ) }}" class="btn btn-primary" role="button" >
+              Pay now </a>
             </td>
-              <td>
-              <a href="{{ url_for('views.salary', expense_id=e.id ) }}" class="btn btn-primary" role="button" >
-              Edit </a>
-            </td>
-
+         
             </tr>
             {% endfor %}
      </tbody>
@@ -54,9 +48,6 @@
  </div>
  </div>
  </div> 
-<div class="button-group" align="right" >
-  <a href="{{ url_for('views.vcreate') }}" class="btn btn-primary" role="button" >
-  Create Vendor </a>
 
 </body>
 
