@@ -240,3 +240,51 @@ def paynow(expense_id):
         )
     db.commit()
     return redirect(url_for('views.vendor'))
+
+@bp.route('/visitors')
+def visitors():
+    db=get_db()
+    posts=db.execute(
+        ' SELECT p.id, visname,category,phoneno,unitno,datein'
+        ' FROM visitor p'
+    ).fetchall()
+    return render_template('visitors.html',posts=posts)
+
+@bp.route('/visitoradd', methods=('GET', 'POST'))
+def addvisitor():
+    if request.method == 'POST':
+        visname = request.form['visname']
+        category = request.form['category']
+        phoneno = request.form['phoneno']
+        unitno = request.form['unitno']
+        error = None
+
+        if not visname:
+            error = 'Name is required.'
+
+        if error is not None:
+            flash(error)
+        else:
+            db = get_db()
+            db.execute(
+                'INSERT INTO visitor (visname,category,phoneno,unitno)'
+                ' VALUES (?, ?, ?, ?)',
+                (visname,category,phoneno,unitno)
+                
+            )
+            db.commit()
+            return redirect(url_for('views.visitors'))
+
+    return render_template('addvisitor.html')    
+
+@bp.route('/visitormanage',methods=('GET','POST'))
+def manage():
+    db=get_db()
+    posts=db.execute(
+           ' SELECT p.id, visname,category,phoneno,unitno,datein'
+           ' FROM visitor p'
+           ' WHERE p.datein BETWEEN  (?) AND (?)',
+           (datein,datein)
+        ).fetchall()
+    return render_template('manage.html',posts=posts)
+

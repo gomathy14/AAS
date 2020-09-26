@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h1 class="h3 mb-2 text-gray-800">Visitors Details</h1>
+<p class="mb-4">View visitors between dates</p>
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Visitor Table</h6>
+  </div>
+
+
+<body>
+
+  
+
+ <form method="post">
+ 	<div class="form-group">
+    <input type="date" min="2018-12-13" max="2022-06-04" step="7">
+    <br>
+      </div>
+
+    
+    <button class ="btn btn-primary">Enter</button>
+    <input action="action" class="btn btn-primary" onclick="window.history.go(-1); 
+    	return false;" type="submit" value="Cancel"/>
+  </form>
+  <script>
+    let today=new Date().toISOString().substr(0,10);
+    document.querySelector("#today").value=today;
+    document.querySelector("#today2").valueAsDate=new Date();
+  </script>
+
+
+	</body>
+
+
+{% endblock %}  

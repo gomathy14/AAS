@@ -21,7 +21,6 @@
             <th>Vendor</th>
             <th>Phoneno</th>
             <th>Monthly fee</th>
-            <th>History</th>
             <th>Bonus</th>
           </tr>
         </thead>
@@ -36,10 +35,10 @@
               <td>{{ e.fee }}</td>
               
 
-              <td>
+              <!--<td>
               <a href="{{ url_for('views.vhistory', expense_id=e.id ) }}" class="btn btn-primary" role="button" >
               View History </a>
-            </td>
+            </td>-->
               <td>
               <a href="{{ url_for('views.salary', expense_id=e.id ) }}" class="btn btn-primary" role="button" >
               Edit </a>
@@ -56,7 +55,7 @@
  </div> 
 <div class="button-group" align="right" >
   <a href="{{ url_for('views.vcreate') }}" class="btn btn-primary" role="button" >
-  Create Vendor </a>
+  Add Vendor </a>
 
 </body>
 

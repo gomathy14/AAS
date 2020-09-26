@@ -3,11 +3,12 @@
 
 {% block content %}
 <body>
-<h1 class="h3 mb-2 text-gray-800">Unpaid Details </h1>
-<p class="mb-4">View the list of all workers whose salary has been paid  </p>
+
+<h1 class="h3 mb-2 text-gray-800">Visitors Details</h1>
+<p class="mb-4">View all the visitors till now  </p>
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Fee Table</h6>
+    <h6 class="m-0 font-weight-bold text-primary">Visitor Table</h6>
   </div>
 
   <div class="card-body">
@@ -17,9 +18,10 @@
           <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Department</th>
-            <th>Salary</th>
-            
+            <th>Category</th>
+            <th>Phoneno</th>
+            <th>Unit no</th>
+            <th>Date check in</th>
             
           </tr>
         </thead>
@@ -28,12 +30,15 @@
           <tr>
             
               <td> {{ e.id }} </td>
-              <td>{{ e.Vname }} </td> 
-              <td>{{ e.cause }}</td>
-              <td>{{ e.fee }}</td>
+              <td>{{ e.visname }} </td> 
+              <td>{{ e.category }}</td>
+              <td>{{ e.phoneno }}</td>
+              <td>{{ e.unitno }}</td>
+              <td>{{ e.datein}}</td>
+              
 
               
-         
+
             </tr>
             {% endfor %}
      </tbody>
@@ -43,6 +48,9 @@
  </div>
  </div>
  </div> 
+<div class="button-group" align="right" >
+  <a href="{{ url_for('views.addvisitor') }}" class="btn btn-primary" role="button" >
+  Add Visitor </a>
 
 </body>
 
