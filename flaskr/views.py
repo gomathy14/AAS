@@ -279,12 +279,27 @@ def addvisitor():
 
 @bp.route('/visitormanage',methods=('GET','POST'))
 def manage():
-    db=get_db()
-    posts=db.execute(
-           ' SELECT p.id, visname,category,phoneno,unitno,datein'
-           ' FROM visitor p'
-           ' WHERE p.datein BETWEEN  (?) AND (?)',
-           (datein,datein)
-        ).fetchall()
-    return render_template('manage.html',posts=posts)
+    if request.method == 'POST':
+        startdate = request.form['startdate']
+        enddate = request.form['enddate']
+        error = None
+
+        if not startdate:
+            error = 'Date is required.'
+
+        if error is not None:
+            flash(error)
+        else:
+            db = get_db()
+            posts=db.execute(
+                ' SELECT p.id, visname,category,phoneno,unitno,datein'
+                ' FROM visitor p'
+                ' WHERE p.datein BETWEEN (?) AND (?)',
+                (startdate,enddate)
+                
+            ).fetchall()
+            return render_template('report.html',posts=posts)
+
+    return render_template('manage.html')
+    
 
