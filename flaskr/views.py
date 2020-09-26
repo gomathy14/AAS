@@ -8,6 +8,19 @@ from .db import get_db
 
 bp = Blueprint('views', __name__)
 
+@bp.route('/dashboard')
+def dashboard():
+    db=get_db()
+    credit=db.execute(
+          ' SELECT sum(MaintenanceFee)'
+          ' FROM income'
+        )
+    debit=db.execute(
+           ' SELECT sum(fee)'
+           ' FROM expenses'
+        )
+    return render_template('dashboard.html',credit=credit,debit=debit)
+
 
 @bp.route('/')
 def index():
