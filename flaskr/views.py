@@ -298,7 +298,7 @@ def manage():
                 (startdate,enddate)
                 
             ).fetchall()
-            return render_template('report.html',posts=posts)
+            return render_template('report.html',posts=posts,startdate=startdate,enddate=enddate)
 
     return render_template('manage.html')
     

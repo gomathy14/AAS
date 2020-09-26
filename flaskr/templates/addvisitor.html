@@ -11,17 +11,17 @@
 <body>
   <div class="container">
  <form method="post">
-  <label for="visname">&emsp;<b>Name : </b> &emsp;&ensp; &emsp; &emsp;&nbsp;</label>
+  <label for="visname">&emsp;<b>Name : </b> &emsp;&ensp; &nbsp;</label>
     <input name="visname" id="visname" style="width: 150px;" placeholder="Enter the name" value="{{ request.form['visname'] }}" required>
     <br>
-    <label for="category">&emsp;<b>Category :</b> &ensp;&emsp; &emsp; &emsp;&nbsp;</label>
+    <label for="category">&emsp;<b>Category :</b> &ensp;</label>
     <input name="category" id="category" style="width: 150px;" placeholder="Enter the category" value="{{ request.form['category'] }}"  required>
     <br>
     
-    <label for="phoneno">&emsp;<b>Phoneno:</b></label>
+    <label for="phoneno">&emsp;<b>Phoneno:</b>&emsp;</label>
     <input name="phoneno" id="phoneno"style="width: 150px;" placeholder="Enter the phoneno" value="{{ request.form['phoneno'] }}" required>
     <br>
-    <label for="unitno">&emsp;<b>UnitNo :</b>&nbsp;&emsp; &emsp; &ensp;&ensp;</label>
+    <label for="unitno">&emsp;<b>UnitNo :</b>&nbsp;&ensp;&ensp;</label>
     <input name="unitno" id="unitno" style="width: 150px;" placeholder="Enter the unitno" value="{{ request.form['unitno'] }}" required>
     <br>
 
@@ -29,7 +29,7 @@
     
     
     
-    <button class ="btn btn-primary">Save</button>
+    <button class ="btn btn-primary" style="margin-left: 19px">Save</button>
     <input action="action" class="btn btn-primary" onclick="window.history.go(-1); 
       return false;" type="submit" value="Cancel"/>
 
@@ -37,5 +37,5 @@
 
 
 
-	</body>
+  </body>
 {% endblock %}  
