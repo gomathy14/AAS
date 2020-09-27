@@ -14,12 +14,16 @@ def dashboard():
     credit=db.execute(
           ' SELECT sum(MaintenanceFee)'
           ' FROM income'
-        )
+        ).fetchone()
     debit=db.execute(
            ' SELECT sum(fee)'
            ' FROM expenses'
-        )
-    return render_template('dashboard.html',credit=credit,debit=debit)
+        ).fetchone()
+    residents=db.execute(
+           ' SELECT count(Name)'
+           ' FROM income'
+        ).fetchone()
+    return render_template('dashboard.html',credit=credit,debit=debit,residents=residents)
 
 
 @bp.route('/')
