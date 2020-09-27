@@ -29,7 +29,7 @@
         <div class="row no-gutters align-items-center">
           <div class="col mr-2">
             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Income (Monthly)</div>
-            <div class="h5 mb-0 font-weight-bold text-gray-800">Rs. {{ credit[0] }} </div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800">Rs. {{ list[0] }} </div>
           </div>
           <div class="col-auto">
             <i class="fas fa-university fa-2x text-gray-300"></i>
@@ -46,7 +46,7 @@
         <div class="row no-gutters align-items-center">
           <div class="col mr-2">
             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> Expenses (Monthly) </div>
-            <div class="h5 mb-0 font-weight-bold text-gray-800"> Rs. {{ debit[0] }} </div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800"> Rs. {{ list[1] }} </div>
           </div>
           <div class="col-auto">
             <i class="fas fa-inr fa-2x text-gray-300"></i>
@@ -59,87 +59,37 @@
 </div>
 
 
-  <div class="row">
-      <div class="col-xl-6">
-          <div class="card mb-4">
-              <div class="card-header">
-                  <i class="fas fa-chart-area mr-1"></i>
-                  EXPENSES 
-              </div>
-              <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-          </div>
-      </div>
-      <div class="col-xl-6">
-          <div class="card mb-4">
-              <div class="card-header">
-                  <i class="fas fa-chart-bar mr-1"></i>
-                  INCOME
-              </div>
-              <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-          </div>
-      </div>
-  </div>
+<div class="col-lg-6">
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-chart-pie mr-1"></i>
+            INCOME/EXPENSES 
+        </div>
+        <div class="card-body"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
+        <div class="card-footer small text-muted">Done by GomathyG</div>
+    </div>
+</div>
 
 {% endblock %}
 
 {% block cusjs %}
-
 <script type="text/javascript">
   // Set new default font family and font color to mimic Bootstrap's default styling
-Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-Chart.defaults.global.defaultFontColor = '#292b2c';
+  Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+  Chart.defaults.global.defaultFontColor = '#292b2c';
 
-// Area Chart Example
-var ctx = document.getElementById("myAreaChart");
-var myLineChart = new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [{
-      label: "Sessions",
-      lineTension: 0.3,
-      backgroundColor: "rgba(2,117,216,0.2)",
-      borderColor: "rgba(2,117,216,1)",
-      pointRadius: 5,
-      pointBackgroundColor: "rgba(2,117,216,1)",
-      pointBorderColor: "rgba(255,255,255,0.8)",
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "rgba(2,117,216,1)",
-      pointHitRadius: 50,
-      pointBorderWidth: 2,
-      data: [100, 302, 263, 34, 87, 10000, 74, 259, 49, 159, 651, 31],
-    }],
-  },
-  options: {
-    scales: {
-      xAxes: [{
-        time: {
-          unit: 'date'
-        },
-        gridLines: {
-          display: false
-        },
-        ticks: {
-          maxTicksLimit: 7
-        }
-      }],
-      yAxes: [{
-        ticks: {
-          min: 0,
-          max: 40000,
-          maxTicksLimit: 5
-        },
-        gridLines: {
-          color: "rgba(0, 0, 0, .125)",
-        }
+  // Pie Chart Example
+  var ctx = document.getElementById("myPieChart");
+  var myPieChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ["Expenses", "Income"],
+      datasets: [{
+        data: {{ list }},
+        backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745'],
       }],
     },
-    legend: {
-      display: false
-    }
-  }
-});
-
+  });
 </script>
 
 {% endblock %}

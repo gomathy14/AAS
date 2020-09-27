@@ -24,7 +24,12 @@ def dashboard():
            ' FROM income'
         ).fetchone()
 
-    return render_template('dashboard.html',credit=credit,debit=debit,residents=residents)
+    list = []
+
+    list.append(credit[0])
+    list.append(debit[0])
+
+    return render_template('dashboard.html',list=list,residents=residents)
 
 
 @bp.route('/')
