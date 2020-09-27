@@ -23,6 +23,7 @@ def dashboard():
            ' SELECT count(Name)'
            ' FROM income'
         ).fetchone()
+
     return render_template('dashboard.html',credit=credit,debit=debit,residents=residents)
 
 
