@@ -150,7 +150,13 @@ a.socialIcon:hover,
 
 <body>
 	{% for message in get_flashed_messages() %}
-	   <div class="flash">{{ message }}</div>
+	   <div class="flash">
+        <div class="alert alert-warning alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Warning!</strong> {{ message }}
+              </div>
+
+
 	{% endfor %}  
 	<div class="container">
     <div class="row">
